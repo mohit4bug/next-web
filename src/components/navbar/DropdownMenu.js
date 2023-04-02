@@ -7,15 +7,31 @@ import { DiGhostSmall } from 'react-icons/di'
 import { AiOutlineUser } from 'react-icons/ai'
 import { BsPlusLg } from 'react-icons/bs'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 
 export default function DropdownMenu() {
 
     const [filterMenuOpen, setFilterMenuOpen] = useState(false)
+    const menuRef = useRef(null)
+
+    const handleClickOutside = (event) => {
+        if (menuRef.current && !menuRef.current.contains(event.target)) {
+            setFilterMenuOpen(false)
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener('click', handleClickOutside, true)
+        return () => {
+            document.removeEventListener('click', handleClickOutside, true)
+        }
+    }, [])
 
     return (
-        <div className="border w-14 md:w-24 h-8 rounded-full flex 
+        <div
+            ref={menuRef}
+            className="border w-14 md:w-24 h-8 rounded-full flex 
         items-center justify-between px-2 relative
          gap-2 text-zinc-500 cursor-pointer " onClick={() => setFilterMenuOpen((prev) => !prev)}>
             <SiFeedly />

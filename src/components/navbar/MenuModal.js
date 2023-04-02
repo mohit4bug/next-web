@@ -6,14 +6,18 @@ import { HiOutlineSpeakerWave } from 'react-icons/hi2'
 import { SlLogin } from 'react-icons/sl'
 
 
-export default function MenuModal() {
+export default function MenuModal({ menuRef }) {
 
     return (
-        <div className="h-fit py-2 flex flex-col
+        <div
+            ref={menuRef}
+            className="h-fit py-2 flex flex-col
         absolute top-5 right-0 w-52 bg-white
         shadow-sm border border-zinc-100 gap-2" onClick={(e) => {
                 e.stopPropagation();
-            }}>
+
+            }}
+        >
 
             <div
                 className="h-8

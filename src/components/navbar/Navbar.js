@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { IoSearchOutline } from 'react-icons/io5'
 import { RxCrossCircled } from 'react-icons/rx'
 import { BiUser } from 'react-icons/bi'
@@ -14,6 +14,20 @@ export default function Navbar() {
     const searchRef = useRef()
     const [menuOpen, setMenuOpen] = useState(false)
 
+    const menuRef = useRef(null)
+
+    const handleClickOutside = (event) => {
+        if (menuRef.current && !menuRef.current.contains(event.target)) {
+            setMenuOpen(false)
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener('click', handleClickOutside, true)
+        return () => {
+            document.removeEventListener('click', handleClickOutside, true)
+        }
+    }, [])
 
 
     return (
@@ -70,7 +84,7 @@ export default function Navbar() {
                     />
                     <BiChevronDown size={20} className="text-zinc-500" />
 
-                    {menuOpen && < MenuModal />}
+                    {menuOpen && < MenuModal menuRef={menuRef} />}
                 </span>
             </div>
 
