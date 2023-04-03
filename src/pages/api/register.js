@@ -41,7 +41,7 @@ const handler = async (req, res) => {
             const token = jwt.sign({
                 email: email
             }, process.env.JWT_MAIL_SECRET, {
-                expiresIn: '5m'
+                expiresIn: '30m'
             })
 
 
@@ -53,6 +53,8 @@ const handler = async (req, res) => {
                     pass: process.env.GMAIL_SECRET
                 }
             })
+
+            // DEPLOYEMENT = https://reddit-mohitkhatri.vercel.app/verify?token=${token}
             const mailOptions = {
                 from: 'Reddit-Clone <next.tsx@gmail.com>',
                 to: email,

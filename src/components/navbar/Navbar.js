@@ -7,8 +7,11 @@ import { BiChevronDown } from 'react-icons/bi'
 import MenuModal from "./MenuModal"
 import DropdownMenu from "./DropdownMenu"
 import Link from "next/link"
+import { useSelector } from "react-redux"
 
 export default function Navbar() {
+
+    const user = useSelector(state => state.user.currentUser)
 
 
     const [search, setSearch] = useState('')
@@ -75,8 +78,14 @@ export default function Navbar() {
             </div>
 
             <div className="flex items-center gap-4">
-                <Link href='/login'> <button className="hidden md:block h-8 rounded-full w-28 
-                bg-blue-500 text-white font-semibold text-[15px]">Log In</button></Link>
+                {
+
+                    !user && <Link href='/login'>
+                        <button className="hidden md:block h-8 rounded-full w-28 
+                bg-blue-500 text-white font-semibold text-[15px]">Log In</button>
+                    </Link>
+                }
+
                 <span className="flex items-center gap-1
                 cursor-pointer relative" onClick={() => setMenuOpen((prev) => !prev)}>
                     <BiUser size={20}

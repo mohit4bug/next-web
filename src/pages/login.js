@@ -3,12 +3,65 @@ import appleLogo from '../assets/apple-logo.png'
 import googleLogo from '../assets/google.webp'
 import loginSideImage from '../assets/login-side.png'
 import Link from "next/link"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
+import toast from 'react-hot-toast'
+import { redditRequest } from "../../lib/axios"
+import { useRouter } from 'next/router'
+import { useSelector, useDispatch } from "react-redux"
+import { loginStart, loginSuccess, loginFailure } from "@/redux/userSlice"
+
 
 
 export default function Login() {
 
+    const dispatch = useDispatch()
+    const router = useRouter()
     const usernameRef = useRef()
+    const [loading, setLoading] = useState(false)
+
+    const [inputs, setInputs] = useState({
+        username: '',
+        password: ''
+    })
+
+    const handleChange = (e) => {
+        setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+    }
+
+    // Login request
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        dispatch(loginStart())
+
+
+        const url = '/login'
+        const p = new Promise(async (resolve, reject) => {
+            try {
+                const res = await redditRequest.post(url, inputs)
+                dispatch(loginSuccess(res.data.user))
+                resolve(res?.data?.message)
+
+            } catch (error) {
+                dispatch(loginFailure({ error: error.response.data.message }))
+                reject(error.response.data.message)
+            }
+        })
+        toast.promise(p, {
+            success: (message) => {
+
+                setTimeout(() => {
+                    router.push('/')
+                }, 2000)
+                return message
+            },
+            error: (error) => {
+
+                return error;
+            },
+        })
+
+
+    }
 
     useEffect(() => {
         usernameRef.current.focus()
@@ -62,8 +115,9 @@ export default function Login() {
                      text-zinc-500">OR</p>
                 </div>
 
-                <div className="flex flex-col gap-3">
+                <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
                     <input
+                        onChange={handleChange}
                         ref={usernameRef}
                         name="username"
                         placeholder="USERNAME"
@@ -72,6 +126,7 @@ export default function Login() {
                          outline-none"
                     />
                     <input
+                        onChange={handleChange}
                         type="password"
                         name="password"
                         placeholder="PASSWORD"
@@ -96,7 +151,7 @@ export default function Login() {
                         <Link href='/register' className="
                         text-blue-500 cursor-pointer font-semibold">SIGN UP</Link>
                     </p>
-                </div>
+                </form>
             </div>
         </div>
     )

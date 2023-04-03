@@ -7,6 +7,8 @@ import { Provider } from 'react-redux'
 import { store } from '../redux/store'
 import { Toaster } from 'react-hot-toast'
 import { QueryClientProvider, QueryClient } from 'react-query'
+import { persistor } from '../redux/store'
+import { PersistGate } from 'redux-persist/integration/react'
 
 const font = Inter_Tight({
   subsets: ['latin']
@@ -32,10 +34,12 @@ export default function App({ Component, pageProps }) {
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
-        <div className={`select-none ${font.className}`}>
-          {showNavbar && <Navbar />}
-          <Component {...pageProps} />
-        </div>
+        <PersistGate loading={null} persistor={persistor}>
+          <div className={`select-none ${font.className}`}>
+            {showNavbar && <Navbar />}
+            <Component {...pageProps} />
+          </div>
+        </PersistGate>
         <Toaster />
       </Provider>
     </QueryClientProvider>

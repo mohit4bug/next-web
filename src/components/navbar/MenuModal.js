@@ -5,9 +5,14 @@ import { IoDocumentTextOutline } from 'react-icons/io5'
 import { HiOutlineSpeakerWave } from 'react-icons/hi2'
 import { SlLogin } from 'react-icons/sl'
 import Link from 'next/link'
+import { useSelector } from 'react-redux'
 
 
 export default function MenuModal({ menuRef }) {
+
+
+    const user = useSelector(state => state.user.currentUser)
+
 
     return (
         <div
@@ -76,17 +81,33 @@ export default function MenuModal({ menuRef }) {
                 <span></span>
             </div>
             <hr className='w-[90%] h-0 my-[-6px] p-0 self-center' />
-            <Link href='/register'><div
-                className="h-8
-                px-2 flex items-center hover:bg-blue-500
-                 hover:text-white">
-                <span className="flex items-center gap-2">
-                    <SlLogin size={16}
-                        className="w-6" />
-                    <p className='text-sm'>Log In / Sign Up</p>
-                </span>
-                <span></span>
-            </div></Link>
+
+            {
+                !user ? <Link href='/register'><div
+                    className="h-8
+                    px-2 flex items-center hover:bg-blue-500
+                  hover:text-white">
+                    <span className="flex items-center gap-2">
+                        <SlLogin size={16}
+                            className="w-6" />
+                        <p className='text-sm'>Log In / Sign Up</p>
+                    </span>
+                    <span></span>
+                </div>
+                </Link> : <div
+                    className="h-8
+                    px-2 flex items-center hover:bg-blue-500
+                  hover:text-white">
+                    <span className="flex items-center gap-2">
+                        <SlLogin size={16}
+                            className="w-6" />
+                        <p className='text-sm'>Log out</p>
+                    </span>
+                    <span></span>
+                </div>
+            }
+
+
         </div>
     )
 }
