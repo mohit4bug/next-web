@@ -54,12 +54,22 @@ const handler = async (req, res) => {
                 }
             })
 
-            // DEPLOYEMENT = https://reddit-mohitkhatri.vercel.app/verify?token=${token}
+            // DEPLOYEMENT = `
             const mailOptions = {
                 from: 'Reddit-Clone <next.tsx@gmail.com>',
                 to: email,
                 subject: 'Please verify your email',
-                html: `<h1><a href="http://localhost:3000/verify?token=${token}">Click here to verify</a></h1>`
+                html: process.env.NODE_ENV === 'production' ?
+                    `<h1>
+                    <a href="https://reddit-mohitkhatri.vercel.app/verify?token=${token}">
+                    Click here to verify
+                    </a>
+                    </h1>`
+                    : `<h1>
+                    <a href="http://localhost:3000/verify?token=${token}">
+                    Click here to verify
+                    </a>
+                    </h1>`
             };
             transport.sendMail(mailOptions, (err, info) => {
                 if (err) {

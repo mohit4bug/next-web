@@ -41,7 +41,7 @@ function Verify() {
                     message === 'User verified' && 'Congratulations 🥳, your registration is complete and you are now an official Redditor.'
                 }
             </p>
-            <Link href='/'><button
+            <Link href={!loading ? '/' : '#'}><button
                 className="bg-orange-500
              w-24 h-8 rounded-sm text-white shadow-sm"
             >{loading ? 'Loading...' : ' Redirect'}</button></Link>
