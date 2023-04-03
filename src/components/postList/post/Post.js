@@ -30,7 +30,7 @@ export default function Post({ post }) {
                 text-sm w-full flex-wrap sm:flex-nowrap items-center'>
 
                     <span className='h-8 w-8 relative'>
-                        <Image src={post?.profileImage} fill className='rounded-full' />
+                        <Image src={post?.profileImage} fill className='rounded-full' alt='profile' />
                     </span>
                     <p className='font-semibold'>&nbsp; {post?.communityName}</p>
                     <p className='text-zinc-500'>&nbsp; Posted by</p>

@@ -3,9 +3,17 @@ import appleLogo from '../assets/apple-logo.png'
 import googleLogo from '../assets/google.webp'
 import loginSideImage from '../assets/login-side.png'
 import Link from "next/link"
+import { useRef, useEffect } from "react"
 
 
-export default function register() {
+export default function Register() {
+
+    const emailRef = useRef()
+
+    useEffect(() => {
+        emailRef.current.focus()
+    }, [])
+
     return (
         <div className="flex h-screen w-full">
             <div className="flex-1 relative sm:flex-auto">
@@ -56,6 +64,7 @@ export default function register() {
 
                 <div className="flex flex-col gap-3">
                     <input
+                        ref={emailRef}
                         name="email"
                         placeholder="EMAIL"
                         type="email"

@@ -56,7 +56,7 @@ export default function DropdownMenu() {
                     <span className='w-full flex items-center justify-between'>
                         <div className='flex items-center w-full gap-2'>
                             <div className='h-6 w-6 rounded-full relative'>
-                                <Image src={'/reddit-nav-small.png'} fill />
+                                <Image src={'/reddit-nav-small.png'} fill alt='community' />
                             </div>
                             <p>r/Googlepixel</p>
                         </div>
@@ -65,7 +65,7 @@ export default function DropdownMenu() {
                     <span className='w-full flex items-center justify-between'>
                         <div className='flex items-center w-full gap-2'>
                             <div className='h-6 w-6 rounded-full relative'>
-                                <Image src={'/reddit-nav-small.png'} fill />
+                                <Image src={'/reddit-nav-small.png'} fill alt='community' />
                             </div>
                             <p>r/Googlepixel</p>
                         </div>
@@ -74,7 +74,7 @@ export default function DropdownMenu() {
                     <span className='w-full flex items-center justify-between'>
                         <div className='flex items-center w-full gap-2'>
                             <div className='h-6 w-6 rounded-full relative'>
-                                <Image src={'/reddit-nav-small.png'} fill />
+                                <Image src={'/reddit-nav-small.png'} fill alt='community' />
                             </div>
                             <p>r/Googlepixel</p>
                         </div>

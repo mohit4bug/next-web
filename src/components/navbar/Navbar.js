@@ -6,6 +6,7 @@ import { BiUser } from 'react-icons/bi'
 import { BiChevronDown } from 'react-icons/bi'
 import MenuModal from "./MenuModal"
 import DropdownMenu from "./DropdownMenu"
+import Link from "next/link"
 
 export default function Navbar() {
 
@@ -37,11 +38,11 @@ export default function Navbar() {
 
             <div className="relative h-full w-24 hidden md:block">
                 <Image fill src={'/reddit-nav-logo.png'}
-                    className="object-contain" />
+                    className="object-contain" alt="logo" />
             </div>
             <div className="relative h-full w-[2.2rem] block md:hidden">
                 <Image fill src={'/reddit-nav-small.png'}
-                    className="object-contain" />
+                    className="object-contain" alt="logo" />
             </div>
 
             <DropdownMenu />
@@ -75,7 +76,7 @@ export default function Navbar() {
 
             <div className="flex items-center gap-4">
                 <button className="hidden md:block h-8 rounded-full w-28 
-                bg-blue-500 text-white font-semibold text-[15px]">Log In</button>
+                bg-blue-500 text-white font-semibold text-[15px]"><Link href='/login'>Log In</Link></button>
                 <span className="flex items-center gap-1
                 cursor-pointer relative" onClick={() => setMenuOpen((prev) => !prev)}>
                     <BiUser size={20}

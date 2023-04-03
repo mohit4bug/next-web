@@ -26,7 +26,7 @@ const CreateSuggestion = () => {
     <div className='bg-white shadow-sm rounded-sm
     border-zinc-300 gap-2'>
       <div className='h-8 w-full relative'>
-        <Image src={'https://www.redditstatic.com/desktop2x/img/id-cards/banner@2x.png'} fill />
+        <Image src={'https://www.redditstatic.com/desktop2x/img/id-cards/banner@2x.png'} fill alt='art' />
       </div>
       <div className='p-2 flex flex-col gap-2'>
         <div className='pl-1'>

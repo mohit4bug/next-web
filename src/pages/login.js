@@ -6,12 +6,12 @@ import Link from "next/link"
 import { useEffect, useRef } from "react"
 
 
-export default function login() {
+export default function Login() {
 
-    const emailRef = useRef()
+    const usernameRef = useRef()
 
     useEffect(() => {
-        emailRef.current.focus()
+        usernameRef.current.focus()
     }, [])
 
     return (
@@ -64,7 +64,7 @@ export default function login() {
 
                 <div className="flex flex-col gap-3">
                     <input
-                        ref={emailRef}
+                        ref={usernameRef}
                         name="username"
                         placeholder="USERNAME"
                         className="w-64 h-10 rounded-sm border

@@ -7,7 +7,7 @@ export default function Share() {
         <div className="h-14 bg-white shadow-sm border-zinc-300 flex
         items-center px-2 gap-3 rounded-sm">
             <div className="relative min-h-[32px] min-w-[32px] rounded-full">
-                <Image src={'/reddit-nav-small.png'} fill className="object-cover" />
+                <Image src={'/reddit-nav-small.png'} fill className="object-cover" alt="profile" />
             </div>
 
 
