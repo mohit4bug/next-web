@@ -76,7 +76,6 @@ export default function Navbar() {
             <div className="flex items-center gap-4">
                 <button className="hidden md:block h-8 rounded-full w-28 
                 bg-blue-500 text-white font-semibold text-[15px]">Log In</button>
-
                 <span className="flex items-center gap-1
                 cursor-pointer relative" onClick={() => setMenuOpen((prev) => !prev)}>
                     <BiUser size={20}
@@ -87,7 +86,6 @@ export default function Navbar() {
                     {menuOpen && < MenuModal menuRef={menuRef} />}
                 </span>
             </div>
-
         </nav>
     )
 }
