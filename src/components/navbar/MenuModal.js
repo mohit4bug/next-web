@@ -4,6 +4,7 @@ import { AiOutlineInfoCircle } from 'react-icons/ai'
 import { IoDocumentTextOutline } from 'react-icons/io5'
 import { HiOutlineSpeakerWave } from 'react-icons/hi2'
 import { SlLogin } from 'react-icons/sl'
+import Link from 'next/link'
 
 
 export default function MenuModal({ menuRef }) {
@@ -75,7 +76,7 @@ export default function MenuModal({ menuRef }) {
                 <span></span>
             </div>
             <hr className='w-[90%] h-0 my-[-6px] p-0 self-center' />
-            <div
+            <Link href='/register'><div
                 className="h-8
                 px-2 flex items-center hover:bg-blue-500
                  hover:text-white">
@@ -85,7 +86,7 @@ export default function MenuModal({ menuRef }) {
                     <p className='text-sm'>Log In / Sign Up</p>
                 </span>
                 <span></span>
-            </div>
+            </div></Link>
         </div>
     )
 }

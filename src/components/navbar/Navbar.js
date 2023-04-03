@@ -75,8 +75,8 @@ export default function Navbar() {
             </div>
 
             <div className="flex items-center gap-4">
-                <button className="hidden md:block h-8 rounded-full w-28 
-                bg-blue-500 text-white font-semibold text-[15px]"><Link href='/login'>Log In</Link></button>
+                <Link href='/login'> <button className="hidden md:block h-8 rounded-full w-28 
+                bg-blue-500 text-white font-semibold text-[15px]">Log In</button></Link>
                 <span className="flex items-center gap-1
                 cursor-pointer relative" onClick={() => setMenuOpen((prev) => !prev)}>
                     <BiUser size={20}

@@ -3,6 +3,8 @@ import '@/styles/globals.css'
 import { Inter_Tight } from 'next/font/google'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import { Provider } from 'react-redux'
+import { store } from '../redux/store'
 
 const font = Inter_Tight({
   subsets: ['latin']
@@ -18,9 +20,11 @@ export default function App({ Component, pageProps }) {
   }, [isLoginPage])
 
   return (
-    <div className={`select-none ${font.className}`}>
-      {showNavbar && <Navbar />}
-      <Component {...pageProps} />
-    </div>
+    <Provider store={store}>
+      <div className={`select-none ${font.className}`}>
+        {showNavbar && <Navbar />}
+        <Component {...pageProps} />
+      </div>
+    </Provider>
   )
 }
