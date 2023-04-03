@@ -3,13 +3,60 @@ import appleLogo from '../assets/apple-logo.png'
 import googleLogo from '../assets/google.webp'
 import loginSideImage from '../assets/login-side.png'
 import Link from "next/link"
-import { useRef, useEffect } from "react"
+import { useRef, useEffect, useState } from "react"
+import toast from 'react-hot-toast'
+import { redditRequest } from "../../lib/axios"
+import { useRouter } from 'next/router'
+
 
 
 export default function Register() {
 
-    const emailRef = useRef()
+    const router = useRouter()
+    const [loading, setLoading] = useState(false)
 
+    const [inputs, setInputs] = useState({
+        username: '',
+        email: '',
+        password: ''
+    })
+
+    const handleChange = (e) => {
+        setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+    }
+
+    // Register request
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        setLoading(true)
+
+        const url = '/register'
+        const p = new Promise(async (resolve, reject) => {
+            try {
+                const res = await redditRequest.post(url, inputs)
+                resolve(res.data.message)
+            } catch (error) {
+                reject(error.response.data.message)
+            }
+        })
+        toast.promise(p, {
+            success: (message) => {
+                setLoading(false)
+                setTimeout(() => {
+                    router.push('/login')
+                }, 2000)
+                return message
+            },
+            error: (error) => {
+                setLoading(false)
+                return error;
+            },
+        })
+
+
+    }
+
+    const emailRef = useRef()
     useEffect(() => {
         emailRef.current.focus()
     }, [])
@@ -19,7 +66,6 @@ export default function Register() {
             <div className="flex-1 relative sm:flex-auto">
                 <Image src={loginSideImage} fill alt="art" />
             </div>
-
 
             <div className="flex-[8] flex flex-col
             pl-5 pt-8 gap-12 pr-2 sm:pr-0">
@@ -62,10 +108,11 @@ export default function Register() {
                      text-zinc-500">OR</p>
                 </div>
 
-                <div className="flex flex-col gap-3">
+                <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
                     <input
                         ref={emailRef}
                         name="email"
+                        onChange={handleChange}
                         placeholder="EMAIL"
                         type="email"
                         className="w-64 h-10 rounded-sm border
@@ -74,6 +121,7 @@ export default function Register() {
                     />
                     <input
                         name="username"
+                        onChange={handleChange}
                         placeholder="USERNAME"
                         className="w-64 h-10 rounded-sm border
                          border-zinc-300 placeholder:text-[11px] pl-2
@@ -82,11 +130,13 @@ export default function Register() {
                     <input
                         type="password"
                         name="password"
+                        onChange={handleChange}
                         placeholder="PASSWORD"
                         className="w-64 h-10 rounded-sm border
                          border-zinc-300 placeholder:text-[11px] pl-2
                          outline-none" />
                     <button
+                        disabled={loading}
                         className="w-64 h-8 text-sm
                          rounded-sm bg-blue-500  
                          text-white font-semibold"
@@ -95,7 +145,7 @@ export default function Register() {
                         <Link href='/login' className="
                         text-blue-500 cursor-pointer font-semibold">LOG IN</Link>
                     </p>
-                </div>
+                </form>
             </div>
         </div>
     )

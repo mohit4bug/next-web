@@ -5,14 +5,24 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { Provider } from 'react-redux'
 import { store } from '../redux/store'
+import { Toaster } from 'react-hot-toast'
+import { QueryClientProvider, QueryClient } from 'react-query'
 
 const font = Inter_Tight({
   subsets: ['latin']
 })
 
+
+
 export default function App({ Component, pageProps }) {
+
   const router = useRouter()
-  const isLoginPage = router.pathname === '/login' || router.pathname === '/register'
+  const queryClient = new QueryClient()
+
+  const isLoginPage = router.pathname === '/login'
+    || router.pathname === '/register' ||
+    router.pathname === '/verify'
+
   const [showNavbar, setShowNavbar] = useState(!isLoginPage)
 
   useEffect(() => {
@@ -20,11 +30,14 @@ export default function App({ Component, pageProps }) {
   }, [isLoginPage])
 
   return (
-    <Provider store={store}>
-      <div className={`select-none ${font.className}`}>
-        {showNavbar && <Navbar />}
-        <Component {...pageProps} />
-      </div>
-    </Provider>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <div className={`select-none ${font.className}`}>
+          {showNavbar && <Navbar />}
+          <Component {...pageProps} />
+        </div>
+        <Toaster />
+      </Provider>
+    </QueryClientProvider>
   )
 }
